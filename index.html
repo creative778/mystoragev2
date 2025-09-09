@@ -3,360 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storage V2 DApp - Blockchain Smart Contract</title>
+    <title>Storage V2 DApp – Giwa Sepolia</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            opacity: 0.9;
-            font-size: 1.1em;
-        }
-        
-        .content {
-            padding: 30px;
-        }
-        
-        .section {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-left: 4px solid #667eea;
-        }
-        
-        .section h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .info-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-        
-        .info-item strong {
-            color: #667eea;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .info-item span {
-            word-break: break-all;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-        }
-        
-        input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 16px;
-            margin-bottom: 15px;
-            transition: border-color 0.3s;
-        }
-        
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        button:disabled {
-            background: #6c757d;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .status {
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-weight: 500;
-        }
-        
-        .success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .info {
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-        
-        .warning {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-        }
-        
-        .event-item {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-        }
-        
-        .event-item h5 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        
-        .network-info {
-            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
-            color: #2d3436;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .library-status {
-            background: #e7f3ff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: bold;
-        }
-        
-        .wallet-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .wallet-btn {
-            background: white;
-            color: #333;
-            border: 2px solid #667eea;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .wallet-btn:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-1px);
-        }
-        
-        .wallet-btn.connected {
-            background: #d4edda;
-            border-color: #28a745;
-            color: #155724;
-        }
-        
-        .footer {
-            background: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            color: #6c757d;
-            border-top: 1px solid #e9ecef;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 10px;
-            }
-            
-            .header {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .section {
-                padding: 20px;
-            }
-            
-            .wallet-buttons {
-                flex-direction: column;
-            }
-        }
+        /* =====  SAME STYLES AS BEFORE  ===== */
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+        background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}
+        .container{max-width:900px;margin:0 auto;background:#fff;border-radius:15px;box-shadow:0 20px 40px rgba(0,0,0,.1);overflow:hidden}
+        .header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:30px;text-align:center}
+        .header h1{font-size:2.5em;margin-bottom:10px}.header p{opacity:.9;font-size:1.1em}
+        .content{padding:30px}.section{background:#f8f9fa;border-radius:10px;padding:25px;margin-bottom:20px;border-left:4px solid #667eea}
+        .section h3{color:#333;margin-bottom:15px;font-size:1.3em}.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;margin-bottom:20px}
+        .info-item{background:#fff;padding:15px;border-radius:8px;border:1px solid #e9ecef}
+        .info-item strong{color:#667eea;display:block;margin-bottom:5px}.info-item span{word-break:break-all;font-family:'Courier New',monospace;font-size:.9em}
+        input{width:100%;padding:12px 15px;border:2px solid #e9ecef;border-radius:8px;font-size:16px;margin-bottom:15px;transition:border-color .3s}
+        input:focus{outline:none;border-color:#667eea}button{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border:none;padding:12px 25px;border-radius:8px;font-size:16px;cursor:pointer;transition:transform .2s,box-shadow .2s;margin-right:10px;margin-bottom:10px}
+        button:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(102,126,234,.4)}button:disabled{background:#6c757d;cursor:not-allowed;transform:none;box-shadow:none}
+        .status{padding:12px;border-radius:8px;margin-top:15px;font-weight:500}.success{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
+        .error{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}.info{background:#d1ecf1;color:#0c5460;border:1px solid #bee5eb}
+        .warning{background:#fff3cd;color:#856404;border:1px solid #ffeaa7}.event-item{background:#fff;border:1px solid #e9ecef;border-radius:8px;padding:15px;margin-bottom:10px}
+        .event-item h5{color:#667eea;margin-bottom:10px}.network-info{background:linear-gradient(135deg,#ffeaa7 0%,#fab1a0 100%);color:#2d3436;padding:15px;border-radius:8px;margin-bottom:20px;text-align:center}
+        .library-status{background:#e7f3ff;padding:15px;border-radius:8px;margin-bottom:20px;text-align:center;font-weight:bold}
+        .wallet-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:15px}.wallet-btn{background:#fff;color:#333;border:2px solid #667eea;padding:10px 20px;border-radius:8px;font-size:14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px}
+        .wallet-btn:hover{background:#667eea;color:#fff;transform:translateY(-1px)}.wallet-btn.connected{background:#d4edda;border-color:#28a745;color:#155724}
+        .footer{background:#f8f9fa;padding:20px;text-align:center;color:#6c757d;border-top:1px solid #e9ecef}
+        @media (max-width:768px){.container{margin:10px;border-radius:10px}.header{padding:20px}.header h1{font-size:2em}.content{padding:20px}.section{padding:20px}.wallet-buttons{flex-direction:column}}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🚀 Storage V2 DApp</h1>
-            <p>Decentralized Storage Smart Contract on GIWA Sepolia Testnet</p>
+            <p>Decentralized Storage Smart Contract on Giwa Sepolia Testnet</p>
         </div>
-        
+
         <div class="content">
-            <div class="library-status" id="libraryStatus">
-                📚 Initializing DApp...
-            </div>
-            
+            <div class="library-status" id="libraryStatus">📚 Initialising DApp…</div>
+
             <div class="network-info">
-                <strong>⚠️ Make sure you're connected to GIWA Sepolia Testnet!</strong>
+                <strong>⚠️ Make sure you’re on Giwa Sepolia Testnet (Chain-ID 91342)</strong>
             </div>
-            
+
             <div class="section">
                 <h3>📊 Contract Information</h3>
                 <div class="info-grid">
-                    <div class="info-item">
-                        <strong>Contract Address:</strong>
-                        <span id="contractAddr">0x61123b7a22d2f1b8c2c4becc8333e8e4209cce28</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Current Stored Value:</strong>
-                        <span id="currentValue">Not connected</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Contract Owner:</strong>
-                        <span id="contractOwner">Not connected</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Your Address:</strong>
-                        <span id="userAddress">Not connected</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Are you the owner?</strong>
-                        <span id="isOwner">Unknown</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Network:</strong>
-                        <span id="networkName">Not connected</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Connected Wallet:</strong>
-                        <span id="connectedWallet">None</span>
-                    </div>
+                    <div class="info-item"><strong>Contract Address:</strong><span id="contractAddr">0x61123b7a22d2f1b8c2c4becc8333e8e4209cce28</span></div>
+                    <div class="info-item"><strong>Current Stored Value:</strong><span id="currentValue">Not connected</span></div>
+                    <div class="info-item"><strong>Contract Owner:</strong><span id="contractOwner">Not connected</span></div>
+                    <div class="info-item"><strong>Your Address:</strong><span id="userAddress">Not connected</span></div>
+                    <div class="info-item"><strong>Are you the owner?</strong><span id="isOwner">Unknown</span></div>
+                    <div class="info-item"><strong>Network:</strong><span id="networkName">Not connected</span></div>
+                    <div class="info-item"><strong>Connected Wallet:</strong><span id="connectedWallet">None</span></div>
                 </div>
-                
-                <h4 style="margin-bottom: 10px;">Connect Your Wallet:</h4>
+
+                <h4 style="margin-bottom:10px">Connect Your Wallet:</h4>
                 <div class="wallet-buttons">
-                    <button class="wallet-btn" onclick="connectWallet('metamask')" id="metamaskBtn">
-                        🦊 MetaMask
-                    </button>
-                    <button class="wallet-btn" onclick="connectWallet('rabby')" id="rabbyBtn">
-                        🐰 Rabby
-                    </button>
-                    <button class="wallet-btn" onclick="connectWallet('coinbase')" id="coinbaseBtn">
-                        🔵 Coinbase Wallet
-                    </button>
-                    <button class="wallet-btn" onclick="connectWallet('walletconnect')" id="walletconnectBtn">
-                        📱 WalletConnect
-                    </button>
-                    <button class="wallet-btn" onclick="connectWallet('auto')" id="autoBtn">
-                        🔗 Auto-detect
-                    </button>
+                    <button class="wallet-btn" onclick="connectWallet('metamask')" id="metamaskBtn">🦊 MetaMask</button>
+                    <button class="wallet-btn" onclick="connectWallet('rabby')" id="rabbyBtn">🐰 Rabby</button>
+                    <button class="wallet-btn" onclick="connectWallet('coinbase')" id="coinbaseBtn">🔵 Coinbase Wallet</button>
+                    <button class="wallet-btn" onclick="connectWallet('walletconnect')" id="walletconnectBtn">📱 WalletConnect</button>
+                    <button class="wallet-btn" onclick="connectWallet('auto')" id="autoBtn">🔗 Auto-detect</button>
                 </div>
-                
+
                 <button onclick="refreshData()" id="refreshBtn" disabled>🔄 Refresh Data</button>
                 <button onclick="disconnectWallet()" id="disconnectBtn" disabled>❌ Disconnect</button>
             </div>
-            
+
             <div class="section">
                 <h3>💾 Store New Value</h3>
-                <p style="margin-bottom: 15px; color: #6c757d;">Only the contract owner can store values. This demonstrates access control in smart contracts.</p>
-                <input type="number" id="storeInput" placeholder="Enter any number (e.g., 42, 1337, 2024)" />
+                <p style="margin-bottom:15px;color:#6c757d">Only the contract owner can store values.</p>
+                <input type="number" id="storeInput" placeholder="Enter any number (e.g. 42)">
                 <button onclick="storeValue()" id="storeBtn" disabled>💾 Store Value</button>
                 <div id="storeStatus"></div>
             </div>
-            
+
             <div class="section">
                 <h3>👑 Transfer Ownership</h3>
-                <p style="margin-bottom: 15px; color: #6c757d;">Transfer contract ownership to another Ethereum address. Be careful - this action cannot be undone!</p>
-                <input type="text" id="newOwnerInput" placeholder="New owner address (0x...)" />
+                <p style="margin-bottom:15px;color:#6c757d">Transfer contract ownership to another address.</p>
+                <input type="text" id="newOwnerInput" placeholder="New owner address (0x…)">
                 <button onclick="transferOwnership()" id="transferBtn" disabled>👑 Transfer Ownership</button>
                 <div id="transferStatus"></div>
             </div>
-            
+
             <div class="section">
                 <h3>📜 Recent Storage Events</h3>
-                <p style="margin-bottom: 15px; color: #6c757d;">View recent storage transactions recorded on the blockchain.</p>
                 <button onclick="getEvents()" id="eventsBtn" disabled>📜 Load Recent Events</button>
                 <div id="events"></div>
             </div>
-            
+
             <div class="section">
                 <h3>🔧 Contract Functions</h3>
-                <p style="margin-bottom: 15px; color: #6c757d;">Test individual contract functions:</p>
                 <button onclick="testRetrieve()" id="retrieveBtn" disabled>📖 Call retrieve()</button>
                 <button onclick="testNumber()" id="numberBtn" disabled>🔢 Call number()</button>
                 <button onclick="testOwner()" id="ownerBtn" disabled>👤 Call owner()</button>
@@ -364,634 +99,289 @@
                 <div id="functionResults"></div>
             </div>
         </div>
-        
+
         <div class="footer">
-            <p>Built with ❤️ using Solidity, Ethers.js, and deployed on GIWA Sepolia Testnet</p>
-            <p>Contract Address: <code>0x61123b7a22d2f1b8c2c4becc8333e8e4209cce28</code></p>
+            <p>Built with ❤️ using Solidity, Ethers.js, and deployed on Giwa Sepolia Testnet</p>
+            <p>Contract: <code>0x61123b7a22d2f1b8c2c4becc8333e8e4209cce28</code></p>
         </div>
     </div>
 
     <script>
-        // Multiple CDN fallback for ethers.js
+        /* =====  CDN LIST FOR ETHERS  ===== */
         const ethersCDNs = [
             'https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js',
             'https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js',
             'https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js',
             'https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js'
         ];
-
         let currentCDNIndex = 0;
 
         function loadEthers() {
             return new Promise((resolve, reject) => {
-                if (typeof window.ethers !== 'undefined') {
-                    resolve();
-                    return;
-                }
-
+                if (typeof window.ethers !== 'undefined') { resolve(); return; }
                 const script = document.createElement('script');
                 script.src = ethersCDNs[currentCDNIndex];
-                
-                script.onload = () => {
-                    if (typeof window.ethers !== 'undefined') {
-                        resolve();
-                    } else {
-                        tryNextCDN(resolve, reject);
-                    }
-                };
-                
-                script.onerror = () => {
-                    tryNextCDN(resolve, reject);
-                };
-                
+                script.onload = () => (typeof window.ethers !== 'undefined' ? resolve() : tryNextCDN(resolve, reject));
+                script.onerror = () => tryNextCDN(resolve, reject);
                 document.head.appendChild(script);
-                
-                // Timeout fallback
-                setTimeout(() => {
-                    if (typeof window.ethers === 'undefined') {
-                        tryNextCDN(resolve, reject);
-                    }
-                }, 5000);
+                setTimeout(() => { if (typeof window.ethers === 'undefined') tryNextCDN(resolve, reject); }, 5000);
             });
         }
-
         function tryNextCDN(resolve, reject) {
             currentCDNIndex++;
-            if (currentCDNIndex < ethersCDNs.length) {
-                loadEthers().then(resolve).catch(reject);
-            } else {
-                reject(new Error('Failed to load ethers.js from all CDNs'));
-            }
+            currentCDNIndex < ethersCDNs.length ? loadEthers().then(resolve).catch(reject) : reject(new Error('Failed to load ethers.js from all CDNs'));
         }
 
-        // Initialize app when DOM is ready
-        document.addEventListener('DOMContentLoaded', async function() {
+        /* =====  GLOBAL VARS  ===== */
+        let provider, signer, contract, userAddress, isConnected = false, connectedWalletType = '';
+        const CONTRACT_ADDRESS = '0x61123b7a22d2f1b8c2c4becc8333e8e4209cce28';
+        const GIWA_SEPOLIA_CHAIN_ID = 91342; // <<<<<  NUMBER  >>>>>
+
+        const ABI = [
+            'function store(uint256 num)',
+            'function retrieve() view returns (uint256)',
+            'function number() view returns (uint256)',
+            'function owner() view returns (address)',
+            'function transferOwnership(address newOwner)',
+            'function getContractInfo() view returns (uint256,address,uint256)',
+            'event NumberStored(uint256 indexed newValue,address indexed setter,uint256 timestamp)'
+        ];
+
+        /* =====  INITIALISATION  ===== */
+        document.addEventListener('DOMContentLoaded', async () => {
             try {
-                document.getElementById('libraryStatus').innerHTML = '📚 Loading Ethers.js library...';
-                
+                document.getElementById('libraryStatus').textContent = '📚 Loading Ethers.js…';
                 await loadEthers();
-                
-                document.getElementById('libraryStatus').innerHTML = '✅ Ethers.js loaded successfully!';
-                document.getElementById('libraryStatus').style.background = '#d4edda';
-                document.getElementById('libraryStatus').style.color = '#155724';
-                
-                initializeApp();
-            } catch (error) {
-                console.error('Failed to load ethers.js:', error);
-                document.getElementById('libraryStatus').innerHTML = `
-                    ❌ Failed to load Ethers.js library from all sources.<br>
-                    <small>Try refreshing the page or check your internet connection.</small>
-                `;
-                document.getElementById('libraryStatus').style.background = '#f8d7da';
-                document.getElementById('libraryStatus').style.color = '#721c24';
+                document.getElementById('libraryStatus').innerHTML = '✅ Ethers.js loaded!';
+                document.getElementById('libraryStatus').className = 'library-status success';
+                initialiseApp();
+            } catch (e) {
+                document.getElementById('libraryStatus').innerHTML = '❌ Could not load Ethers.js<br><small>Refresh the page or check your connection.</small>';
+                document.getElementById('libraryStatus').className = 'library-status error';
             }
         });
 
-        // Global variables
-        let provider, signer, contract, userAddress, isConnected = false, connectedWalletType = '';
-        
-        // Contract configuration
-        const CONTRACT_ADDRESS = "0x61123b7a22d2f1b8c2c4becc8333e8e4209cce28";
-        const GIWA_SEPOLIA_CHAIN_ID = "91342"; // 913421 in hex
-        
-        const ABI = [
-            "function store(uint256 num)",
-            "function retrieve() view returns (uint256)",
-            "function number() view returns (uint256)",
-            "function owner() view returns (address)",
-            "function transferOwnership(address newOwner)",
-            "function getContractInfo() view returns (uint256, address, uint256)",
-            "event NumberStored(uint256 indexed newValue, address indexed setter, uint256 timestamp)"
-        ];
-
-        async function initializeApp() {
-            try {
-                // Check if already connected to any wallet
-                if (await isAnyWalletConnected()) {
-                    await connectWallet('auto');
-                }
-            } catch (error) {
-                console.error('Failed to initialize app:', error);
-                showStatus('Failed to initialize app: ' + error.message, 'error', 'storeStatus');
-            }
+        async function initialiseApp() {
+            if (await isAnyWalletConnected()) await connectWallet('auto');
         }
-
         async function isAnyWalletConnected() {
-            try {
-                if (typeof window.ethereum !== 'undefined') {
-                    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-                    return accounts.length > 0;
-                }
-            } catch (error) {
-                console.error('Error checking wallet connection:', error);
-            }
-            return false;
+            try { return typeof window.ethereum !== 'undefined' && (await window.ethereum.request({ method: 'eth_accounts' })).length > 0; } catch { return false; }
         }
 
-        function detectWalletType() {
-            if (typeof window.ethereum !== 'undefined') {
-                if (window.ethereum.isRabby) return 'Rabby';
-                if (window.ethereum.isMetaMask) return 'MetaMask';
-                if (window.ethereum.isCoinbaseWallet) return 'Coinbase Wallet';
-                if (window.ethereum.isWalletConnect) return 'WalletConnect';
-                return 'Unknown Wallet';
-            }
-            return 'No Wallet';
-        }
-
+        /* =====  WALLET CONNECTION  ===== */
         async function connectWallet(walletType = 'auto') {
             try {
-                if (typeof window.ethereum === 'undefined') {
-                    showStatus('No Ethereum wallet detected. Please install MetaMask, Rabby, or another compatible wallet.', 'error', 'storeStatus');
-                    return;
-                }
+                if (typeof window.ethereum === 'undefined') { showStatus('No wallet detected. Install MetaMask / Rabby etc.', 'error', 'storeStatus'); return; }
+                if (typeof ethers === 'undefined') { showStatus('Ethers.js not loaded. Refresh.', 'error', 'storeStatus'); return; }
 
-                if (typeof ethers === 'undefined') {
-                    showStatus('Ethers.js library not loaded. Please refresh the page.', 'error', 'storeStatus');
-                    return;
-                }
-
-                showStatus('Connecting to wallet...', 'info', 'storeStatus');
-
-                // Handle specific wallet connections
-                if (walletType === 'rabby' && !window.ethereum.isRabby) {
-                    showStatus('Rabby wallet not detected. Please install Rabby or use auto-detect.', 'error', 'storeStatus');
-                    return;
-                }
-
-                if (walletType === 'metamask' && !window.ethereum.isMetaMask && window.ethereum.isRabby) {
-                    showStatus('MetaMask not detected (Rabby found instead). Please disable Rabby or use auto-detect.', 'error', 'storeStatus');
-                    return;
-                }
-
-                // Request account access
+                showStatus('Connecting…', 'info', 'storeStatus');
                 await window.ethereum.request({ method: 'eth_requestAccounts' });
-                
+
                 provider = new ethers.providers.Web3Provider(window.ethereum);
                 signer = provider.getSigner();
                 userAddress = await signer.getAddress();
-                
-                // Detect and store wallet type
                 connectedWalletType = detectWalletType();
-                
-                // Check network
+
                 const network = await provider.getNetwork();
-                document.getElementById('networkName').textContent = network.name === 'unknown' ? `Chain ID: ${network.chainId}` : network.name;
-                
-                if (network.chainId !== 913421) {
-                    showStatus('⚠️ Please switch to GIWA Sepolia Testnet (Chain ID: 913421)', 'warning', 'storeStatus');
-                    await switchToGiwaSepolia();
-                    return;
-                }
-                
+                document.getElementById('networkName').textContent = network.chainId === GIWA_SEPOLIA_CHAIN_ID ? 'Giwa Sepolia' : `Chain ${network.chainId}`;
+                if (network.chainId !== GIWA_SEPOLIA_CHAIN_ID) { await switchToGiwaSepolia(); return; }
+
                 contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
-                
-                // Update UI
                 document.getElementById('userAddress').textContent = userAddress;
                 document.getElementById('connectedWallet').textContent = connectedWalletType;
-                
-                // Update wallet buttons
                 updateWalletButtons(connectedWalletType);
-                
-                // Enable buttons
-                enableButtons();
-                isConnected = true;
-                
+                enableButtons(); isConnected = true;
                 await refreshData();
-                showStatus(`${connectedWalletType} connected successfully! 🎉`, 'success', 'storeStatus');
-                
-            } catch (error) {
-                console.error('Connection error:', error);
-                if (error.code === 4001) {
-                    showStatus('Connection cancelled by user', 'warning', 'storeStatus');
-                } else {
-                    showStatus('Failed to connect wallet: ' + error.message, 'error', 'storeStatus');
-                }
+                showStatus(`${connectedWalletType} connected 🎉`, 'success', 'storeStatus');
+            } catch (e) {
+                console.error(e);
+                if (e.code === 4001) showStatus('Connection cancelled', 'warning', 'storeStatus');
+                else showStatus('Connection failed: ' + e.message, 'error', 'storeStatus');
             }
         }
 
-        function updateWalletButtons(connectedWallet) {
-            const buttons = document.querySelectorAll('.wallet-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('connected');
-            });
-            
-            // Mark connected wallet
-            if (connectedWallet.toLowerCase().includes('metamask')) {
-                document.getElementById('metamaskBtn').classList.add('connected');
-            } else if (connectedWallet.toLowerCase().includes('rabby')) {
-                document.getElementById('rabbyBtn').classList.add('connected');
-            } else if (connectedWallet.toLowerCase().includes('coinbase')) {
-                document.getElementById('coinbaseBtn').classList.add('connected');
-            }
+        function detectWalletType() {
+            if (typeof window.ethereum === 'undefined') return 'No Wallet';
+            if (window.ethereum.isRabby) return 'Rabby';
+            if (window.ethereum.isMetaMask) return 'MetaMask';
+            if (window.ethereum.isCoinbaseWallet) return 'Coinbase Wallet';
+            if (window.ethereum.isWalletConnect) return 'WalletConnect';
+            return 'Unknown Wallet';
         }
-
+        function updateWalletButtons(connected) {
+            document.querySelectorAll('.wallet-btn').forEach(b => b.classList.remove('connected'));
+            if (connected.toLowerCase().includes('metamask')) document.getElementById('metamaskBtn').classList.add('connected');
+            if (connected.toLowerCase().includes('rabby')) document.getElementById('rabbyBtn').classList.add('connected');
+            if (connected.toLowerCase().includes('coinbase')) document.getElementById('coinbaseBtn').classList.add('connected');
+        }
         async function disconnectWallet() {
-            try {
-                provider = null;
-                signer = null;
-                contract = null;
-                userAddress = '';
-                isConnected = false;
-                connectedWalletType = '';
-                
-                // Reset UI
-                document.getElementById('userAddress').textContent = 'Not connected';
-                document.getElementById('connectedWallet').textContent = 'None';
-                document.getElementById('currentValue').textContent = 'Not connected';
-                document.getElementById('contractOwner').textContent = 'Not connected';
-                document.getElementById('isOwner').textContent = 'Unknown';
-                document.getElementById('networkName').textContent = 'Not connected';
-                
-                // Reset wallet buttons
-                document.querySelectorAll('.wallet-btn').forEach(btn => {
-                    btn.classList.remove('connected');
-                });
-                
-                // Disable buttons
-                disableButtons();
-                
-                showStatus('Wallet disconnected', 'info', 'storeStatus');
-            } catch (error) {
-                console.error('Disconnect error:', error);
-                showStatus('Error disconnecting: ' + error.message, 'error', 'storeStatus');
-            }
+            provider = signer = contract = null; userAddress = ''; isConnected = false; connectedWalletType = '';
+            document.getElementById('userAddress').textContent = 'Not connected';
+            document.getElementById('connectedWallet').textContent = 'None';
+            document.getElementById('currentValue').textContent = 'Not connected';
+            document.getElementById('contractOwner').textContent = 'Not connected';
+            document.getElementById('isOwner').textContent = 'Unknown';
+            document.getElementById('networkName').textContent = 'Not connected';
+            document.querySelectorAll('.wallet-btn').forEach(b => b.classList.remove('connected'));
+            disableButtons();
+            showStatus('Wallet disconnected', 'info', 'storeStatus');
         }
-
         async function switchToGiwaSepolia() {
+            const hexChainId = '0x' + GIWA_SEPOLIA_CHAIN_ID.toString(16);
             try {
-                await window.ethereum.request({
-                    method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: GIWA_SEPOLIA_CHAIN_ID }],
-                });
-                // Retry connection after network switch
+                await window.ethereum.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: hexChainId }] });
                 setTimeout(() => connectWallet('auto'), 1000);
-            } catch (switchError) {
-                if (switchError.code === 4902) {
-                    try {
-                        await window.ethereum.request({
-                            method: 'wallet_addEthereumChain',
-                            params: [{
-                                chainId: GIWA_SEPOLIA_CHAIN_ID,
-                                chainName: 'GIWA Sepolia Testnet',
-                                nativeCurrency: {
-                                    name: 'ETH',
-                                    symbol: 'ETH',
-                                    decimals: 18
-                                },
-                                rpcUrls: ['https://sepolia-rpc.giwa.io'], // Replace with actual RPC URL
-                                blockExplorerUrls: ['https://sepolia-explorer.giwa.io'] // Replace with actual explorer URL
-                            }]
-                        });
-                        setTimeout(() => connectWallet('auto'), 1000);
-                    } catch (addError) {
-                        showStatus('Failed to add GIWA Sepolia network. Please add it manually to your wallet.', 'error', 'storeStatus');
-                    }
-                } else {
-                    showStatus('Failed to switch network: ' + switchError.message, 'error', 'storeStatus');
-                }
+            } catch (e) {
+                if (e.code === 4902) {
+                    await window.ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: [{
+                            chainId: hexChainId,
+                            chainName: 'Giwa Sepolia Testnet',
+                            nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+                            rpcUrls: ['https://sepolia-rpc.giwa.io'],
+                            blockExplorerUrls: ['https://sepolia-explorer.giwa.io']
+                        }]
+                    });
+                    setTimeout(() => connectWallet('auto'), 1000);
+                } else { showStatus('Could not switch network: ' + e.message, 'error', 'storeStatus'); }
             }
         }
-
         function enableButtons() {
-            const buttons = ['refreshBtn', 'disconnectBtn', 'storeBtn', 'transferBtn', 'eventsBtn', 'retrieveBtn', 'numberBtn', 'ownerBtn', 'infoBtn'];
-            buttons.forEach(id => {
-                const btn = document.getElementById(id);
-                if (btn) btn.disabled = false;
-            });
+            ['refreshBtn', 'disconnectBtn', 'storeBtn', 'transferBtn', 'eventsBtn', 'retrieveBtn', 'numberBtn', 'ownerBtn', 'infoBtn'].forEach(id => { const b = document.getElementById(id); if (b) b.disabled = false; });
         }
-
         function disableButtons() {
-            const buttons = ['refreshBtn', 'disconnectBtn', 'storeBtn', 'transferBtn', 'eventsBtn', 'retrieveBtn', 'numberBtn', 'ownerBtn', 'infoBtn'];
-            buttons.forEach(id => {
-                const btn = document.getElementById(id);
-                if (btn) btn.disabled = true;
-            });
+            ['refreshBtn', 'disconnectBtn', 'storeBtn', 'transferBtn', 'eventsBtn', 'retrieveBtn', 'numberBtn', 'ownerBtn', 'infoBtn'].forEach(id => { const b = document.getElementById(id); if (b) b.disabled = true; });
         }
 
+        /* =====  CORE FUNCTIONS  ===== */
         async function refreshData() {
-            if (!isConnected || !contract) {
-                showStatus('Please connect your wallet first', 'error', 'storeStatus');
-                return;
-            }
-
+            if (!isConnected || !contract) { showStatus('Connect wallet first', 'error', 'storeStatus'); return; }
             try {
-                showStatus('Loading contract data...', 'info', 'storeStatus');
-                
-                const [currentValue, owner] = await Promise.all([
-                    contract.number(),
-                    contract.owner()
-                ]);
-                
-                const isOwner = userAddress && userAddress.toLowerCase() === owner.toLowerCase();
-                
-                document.getElementById('currentValue').textContent = currentValue.toString();
+                showStatus('Loading data…', 'info', 'storeStatus');
+                const [val, owner] = await Promise.all([contract.number(), contract.owner()]);
+                const ownerBool = userAddress && userAddress.toLowerCase() === owner.toLowerCase();
+                document.getElementById('currentValue').textContent = val.toString();
                 document.getElementById('contractOwner').textContent = owner;
-                document.getElementById('isOwner').textContent = isOwner ? 'Yes ✅' : 'No ❌';
-                
-                showStatus('Data refreshed successfully! ✅', 'success', 'storeStatus');
-                
-            } catch (error) {
-                console.error('Refresh error:', error);
-                showStatus('Failed to load contract data: ' + error.message, 'error', 'storeStatus');
+                document.getElementById('isOwner').textContent = ownerBool ? 'Yes ✅' : 'No ❌';
+                showStatus('Data refreshed ✅', 'success', 'storeStatus');
+            } catch (e) {
+                showStatus('Refresh failed: ' + e.message, 'error', 'storeStatus');
             }
         }
-
         async function storeValue() {
-            if (!isConnected || !signer) {
-                showStatus('Please connect your wallet first', 'error', 'storeStatus');
-                return;
-            }
-
-            const value = document.getElementById('storeInput').value.trim();
-            if (!value || isNaN(value)) {
-                showStatus('Please enter a valid number', 'error', 'storeStatus');
-                return;
-            }
-
+            if (!isConnected || !signer) { showStatus('Connect wallet first', 'error', 'storeStatus'); return; }
+            const val = document.getElementById('storeInput').value.trim();
+            if (!val || isNaN(val)) { showStatus('Enter a valid number', 'error', 'storeStatus'); return; }
             try {
-                showStatus(`Preparing transaction... Please confirm in ${connectedWalletType}`, 'info', 'storeStatus');
-                
-                const tx = await contract.connect(signer).store(value);
-                showStatus(`Transaction sent! Hash: ${tx.hash}. Waiting for confirmation...`, 'info', 'storeStatus');
-                
-                const receipt = await tx.wait();
-                showStatus(`✅ Value ${value} stored successfully! Block: ${receipt.blockNumber}`, 'success', 'storeStatus');
-                
+                showStatus(`Confirm in ${connectedWalletType}…`, 'info', 'storeStatus');
+                const tx = await contract.connect(signer).store(val);
+                showStatus(`Tx sent: ${tx.hash}`, 'info', 'storeStatus');
+                const rcpt = await tx.wait();
+                showStatus(`✅ Value ${val} stored in block ${rcpt.blockNumber}`, 'success', 'storeStatus');
                 document.getElementById('storeInput').value = '';
                 await refreshData();
-                
-            } catch (error) {
-                console.error('Store error:', error);
-                if (error.message.includes('Only owner')) {
-                    showStatus('❌ Access denied! Only the contract owner can store values.', 'error', 'storeStatus');
-                } else if (error.code === 4001) {
-                    showStatus('Transaction cancelled by user', 'warning', 'storeStatus');
-                } else {
-                    showStatus('Transaction failed: ' + error.message, 'error', 'storeStatus');
-                }
+            } catch (e) {
+                if (e.message.includes('Only owner')) showStatus('❌ Only owner can store', 'error', 'storeStatus');
+                else if (e.code === 4001) showStatus('Tx cancelled', 'warning', 'storeStatus');
+                else showStatus('Tx failed: ' + e.message, 'error', 'storeStatus');
             }
         }
-
         async function transferOwnership() {
-            if (!isConnected || !signer) {
-                showStatus('Please connect your wallet first', 'error', 'transferStatus');
-                return;
-            }
-
-            const newOwner = document.getElementById('newOwnerInput').value.trim();
-            if (!newOwner) {
-                showStatus('Please enter a new owner address', 'error', 'transferStatus');
-                return;
-            }
-
-            if (!ethers.utils.isAddress(newOwner)) {
-                showStatus('Please enter a valid Ethereum address', 'error', 'transferStatus');
-                return;
-            }
-
-            if (!confirm(`Are you sure you want to transfer ownership to ${newOwner}? This cannot be undone!`)) {
-                return;
-            }
-
+            if (!isConnected || !signer) { showStatus('Connect wallet first', 'error', 'transferStatus'); return; }
+            const addr = document.getElementById('newOwnerInput').value.trim();
+            if (!addr) { showStatus('Enter new owner address', 'error', 'transferStatus'); return; }
+            if (!ethers.utils.isAddress(addr)) { showStatus('Invalid address', 'error', 'transferStatus'); return; }
+            if (!confirm(`Transfer ownership to ${addr}? Cannot be undone!`)) return;
             try {
-                showStatus(`Preparing ownership transfer... Please confirm in ${connectedWalletType}`, 'info', 'transferStatus');
-                
-                const tx = await contract.connect(signer).transferOwnership(newOwner);
-                showStatus(`Transaction sent! Hash: ${tx.hash}. Waiting for confirmation...`, 'info', 'transferStatus');
-                
-                const receipt = await tx.wait();
-                showStatus(`✅ Ownership transferred to ${newOwner} successfully! Block: ${receipt.blockNumber}`, 'success', 'transferStatus');
-                
+                showStatus(`Confirm in ${connectedWalletType}…`, 'info', 'transferStatus');
+                const tx = await contract.connect(signer).transferOwnership(addr);
+                showStatus(`Tx sent: ${tx.hash}`, 'info', 'transferStatus');
+                const rcpt = await tx.wait();
+                showStatus(`✅ Ownership transferred to ${addr}`, 'success', 'transferStatus');
                 document.getElementById('newOwnerInput').value = '';
                 await refreshData();
-                
-            } catch (error) {
-                console.error('Transfer error:', error);
-                if (error.message.includes('Only owner')) {
-                    showStatus('❌ Access denied! Only the current owner can transfer ownership.', 'error', 'transferStatus');
-                } else if (error.code === 4001) {
-                    showStatus('Transaction cancelled by user', 'warning', 'transferStatus');
-                } else {
-                    showStatus('Transaction failed: ' + error.message, 'error', 'transferStatus');
-                }
+            } catch (e) {
+                if (e.message.includes('Only owner')) showStatus('❌ Only owner can transfer', 'error', 'transferStatus');
+                else if (e.code === 4001) showStatus('Tx cancelled', 'warning', 'transferStatus');
+                else showStatus('Tx failed: ' + e.message, 'error', 'transferStatus');
             }
         }
-
         async function getEvents() {
-            if (!isConnected || !contract) {
-                showStatus('Please connect your wallet first', 'error', 'events');
-                return;
-            }
-
+            if (!isConnected || !contract) { showStatus('Connect wallet first', 'error', 'events'); return; }
             try {
-                showStatus('Loading recent events...', 'info', 'events');
-                
+                showStatus('Loading events…', 'info', 'events');
                 const filter = contract.filters.NumberStored();
-                const events = await contract.queryFilter(filter, -1000);
-                
-                let eventsHtml = '';
-                if (events.length === 0) {
-                    eventsHtml = '<div class="status info">No storage events found in recent blocks</div>';
-                } else {
-                    eventsHtml = `<h4 style="margin-bottom: 15px;">Found ${events.length} storage events:</h4>`;
-                    events.reverse().slice(0, 10).forEach((event, index) => {
-                        const date = new Date(event.args.timestamp * 1000);
-                        eventsHtml += `
-                            <div class="event-item">
-                                <h5>Event #${index + 1}</h5>
-                                <p><strong>Value Stored:</strong> ${event.args.newValue.toString()}</p>
-                                <p><strong>Stored By:</strong> ${event.args.setter}</p>
-                                <p><strong>Timestamp:</strong> ${date.toLocaleString()}</p>
-                                <p><strong>Block Number:</strong> ${event.blockNumber}</p>
-                                <p><strong>Transaction Hash:</strong> ${event.transactionHash}</p>
-                            </div>
-                        `;
+                const evs = await contract.queryFilter(filter, -1000);
+                let html = '';
+                if (evs.length === 0) html = '<div class="status info">No events in last 1000 blocks</div>';
+                else {
+                    html = `<h4 style="margin-bottom:15px">Found ${evs.length} events (latest 10 shown)</h4>`;
+                    evs.reverse().slice(0, 10).forEach(ev => {
+                        const d = new Date(ev.args.timestamp * 1000);
+                        html += `<div class="event-item"><h5>Event</h5>
+                            <p><strong>Value:</strong> ${ev.args.newValue.toString()}</p>
+                            <p><strong>By:</strong> ${ev.args.setter}</p>
+                            <p><strong>Time:</strong> ${d.toLocaleString()}</p>
+                            <p><strong>Block:</strong> ${ev.blockNumber}</p>
+                            <p><strong>Tx:</strong> ${ev.transactionHash}</p></div>`;
                     });
-                    if (events.length > 10) {
-                        eventsHtml += `<div class="status info">Showing latest 10 of ${events.length} events</div>`;
-                    }
                 }
-                
-                document.getElementById('events').innerHTML = eventsHtml;
-                
-            } catch (error) {
-                console.error('Events error:', error);
-                showStatus('Failed to load events: ' + error.message, 'error', 'events');
-            }
+                document.getElementById('events').innerHTML = html;
+            } catch (e) { showStatus('Events failed: ' + e.message, 'error', 'events'); }
         }
 
-        // Test individual contract functions
-        async function testRetrieve() {
-            await testFunction('retrieve', 'retrieve()');
-        }
-
-        async function testNumber() {
-            await testFunction('number', 'number()');
-        }
-
-        async function testOwner() {
-            await testFunction('owner', 'owner()');
-        }
-
+        /* =====  QUICK TEST CALLS  ===== */
+        async function testRetrieve() { await testCall('retrieve', 'retrieve()'); }
+        async function testNumber() { await testCall('number', 'number()'); }
+        async function testOwner() { await testCall('owner', 'owner()'); }
         async function testGetContractInfo() {
             try {
-                const result = await contract.getContractInfo();
-                const [number, owner, balance] = result;
-                showFunctionResult(`getContractInfo() returned:<br>
-                    Number: ${number.toString()}<br>
-                    Owner: ${owner}<br>
-                    Balance: ${ethers.utils.formatEther(balance)} ETH`);
-            } catch (error) {
-                showFunctionResult(`getContractInfo() failed: ${error.message}`, 'error');
+                const [num, own, bal] = await contract.getContractInfo();
+                showFunctionResult(`getContractInfo()<br>Number: ${num.toString()}<br>Owner: ${own}<br>Balance: ${ethers.utils.formatEther(bal)} ETH`);
+            } catch (e) { showFunctionResult('getContractInfo() failed: ' + e.message, 'error'); }
+        }
+        async function testCall(fn, label) {
+            if (!isConnected || !contract) { showFunctionResult('Connect wallet first', 'error'); return; }
+            try { const r = await contract[fn](); showFunctionResult(`${label} → ${r.toString()}`); } catch (e) { showFunctionResult(`${label} failed: ` + e.message, 'error'); }
+        }
+        function showFunctionResult(msg, cls = 'success') {
+            const el = document.getElementById('functionResults');
+            if (el) el.innerHTML = `<div class="status ${cls}">${msg}</div>`;
+        }
+
+        /* =====  UI HELPERS  ===== */
+        function showStatus(msg, type, elmId) {
+            const el = document.getElementById(elmId);
+            if (el) {
+                el.innerHTML = `<div class="status ${type}">${msg}</div>`;
+                if (type === 'success') setTimeout(() => el.innerHTML = '', 5000);
             }
         }
 
-        async function testFunction(functionName, displayName) {
-            if (!isConnected || !contract) {
-                showFunctionResult('Please connect your wallet first', 'error');
-                return;
-            }
-
-            try {
-                const result = await contract[functionName]();
-                showFunctionResult(`${displayName} returned: ${result.toString()}`);
-            } catch (error) {
-                showFunctionResult(`${displayName} failed: ${error.message}`, 'error');
-            }
+        /* =====  WALLET EVENTS  ===== */
+        if (typeof window.ethereum !== 'undefined') {
+            window.ethereum.on('accountsChanged', accs => { if (accs.length === 0) disconnectWallet(); else location.reload(); });
+            window.ethereum.on('chainChanged', () => location.reload());
+            window.ethereum.on('disconnect', () => disconnectWallet());
         }
 
-        function showFunctionResult(message, type = 'success') {
-            const element = document.getElementById('functionResults');
-            if (element) {
-                element.innerHTML = `<div class="status ${type}">${message}</div>`;
+        /* =====  KEYBOARD SHORTCUTS  ===== */
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 'r') { e.preventDefault(); if (!document.getElementById('refreshBtn').disabled) refreshData(); }
             }
-        }
-
-        function showStatus(message, type, elementId) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.innerHTML = `<div class="status ${type}">${message}</div>`;
-                if (type === 'success') {
-                    setTimeout(() => {
-                        element.innerHTML = '';
-                    }, 5000);
-                }
-            }
-        }
-
-        // Handle account and network changes for all wallets
-        if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
-            // Account changes
-            window.ethereum.on('accountsChanged', (accounts) => {
-                if (accounts.length === 0) {
-                    disconnectWallet();
-                } else {
-                    location.reload();
-                }
-            });
-
-            // Network changes
-            window.ethereum.on('chainChanged', (chainId) => {
-                location.reload();
-            });
-
-            // Connection changes
-            window.ethereum.on('connect', (connectInfo) => {
-                console.log('Wallet connected:', connectInfo);
-            });
-
-            window.ethereum.on('disconnect', (error) => {
-                console.log('Wallet disconnected:', error);
-                disconnectWallet();
-            });
-        }
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(event) {
-            if (event.ctrlKey || event.metaKey) {
-                switch(event.key) {
-                    case 'r':
-                        event.preventDefault();
-                        if (!document.getElementById('refreshBtn').disabled) {
-                            refreshData();
-                        }
-                        break;
-                    case 'Enter':
-                        if (event.target.id === 'storeInput') {
-                            event.preventDefault();
-                            storeValue();
-                        } else if (event.target.id === 'newOwnerInput') {
-                            event.preventDefault();
-                            transferOwnership();
-                        }
-                        break;
-                }
+            if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
+                e.preventDefault();
+                if (e.target.id === 'storeInput') storeValue();
+                if (e.target.id === 'newOwnerInput') transferOwnership();
             }
         });
 
-        // Auto-refresh data every 30 seconds when connected
-        setInterval(() => {
-            if (isConnected && contract) {
-                refreshData();
-            }
-        }, 30000);
+        /* =====  AUTO-REFRESH  ===== */
+        setInterval(() => { if (isConnected && contract) refreshData(); }, 30000);
 
-        // Prevent form submission on Enter key
-        document.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter' && event.target.tagName === 'INPUT') {
-                event.preventDefault();
-                if (event.target.id === 'storeInput') {
-                    storeValue();
-                } else if (event.target.id === 'newOwnerInput') {
-                    transferOwnership();
-                }
-            }
-        });
-
-        // Add visual feedback for wallet detection
-        function updateWalletAvailability() {
-            const wallets = [
-                { id: 'metamaskBtn', condition: window.ethereum?.isMetaMask, name: 'MetaMask' },
-                { id: 'rabbyBtn', condition: window.ethereum?.isRabby, name: 'Rabby' },
-                { id: 'coinbaseBtn', condition: window.ethereum?.isCoinbaseWallet, name: 'Coinbase Wallet' },
-                { id: 'walletconnectBtn', condition: typeof window.WalletConnect !== 'undefined', name: 'WalletConnect' }
-            ];
-
-            wallets.forEach(wallet => {
-                const btn = document.getElementById(wallet.id);
-                if (btn) {
-                    if (!wallet.condition) {
-                        btn.style.opacity = '0.5';
-                        btn.title = `${wallet.name} not detected`;
-                    } else {
-                        btn.style.opacity = '1';
-                        btn.title = `Connect with ${wallet.name}`;
-                    }
-                }
-            });
-        }
-
-        // Check wallet availability on load
-        setTimeout(updateWalletAvailability, 1000);
-
-        // Error handling for unhandled promise rejections
-        window.addEventListener('unhandledrejection', function(event) {
-            console.error('Unhandled promise rejection:', event.reason);
-            if (event.reason?.message) {
-                showStatus('Unexpected error: ' + event.reason.message, 'error', 'storeStatus');
-            }
-        });
-
-        // Service worker registration for offline functionality (optional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                // Uncomment if you want to add a service worker
-                // navigator.serviceWorker.register('/sw.js');
-            });
-        }
-
-        console.log('🚀 Storage V2 DApp initialized successfully!');
+        console.log('🚀 Storage V2 DApp initialised – Giwa Sepolia ready');
     </script>
 </body>
 </html>
