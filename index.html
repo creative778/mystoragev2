@@ -46,44 +46,40 @@
     </div>
 
     <!-- Load libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/ethers@5/dist/ethers.umd.min.js"></script> <!-- Updated ethers.js source -->
-    <script src="https://unpkg.com/web3modal@1.9.11/dist/web3modal.min.js"></script> <!-- Web3Modal for multi-wallet support -->
-    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script> <!-- Required for Web3Modal -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5/dist/ethers.umd.min.js"></script>
+    <script src="https://unpkg.com/web3modal@1.9.11/dist/web3modal.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
 
     <script>
-        // Wait for DOM and libraries to load
         document.addEventListener('DOMContentLoaded', async function() {
             if (typeof ethers === 'undefined' || typeof Web3Modal === 'undefined') {
                 document.getElementById('libraryStatus').innerHTML = '❌ Failed to load libraries. Please refresh the page or check your internet connection.';
-                document.getElementById('libraryStatus').className = 'library-status error'; // Assuming you add a .error class in CSS
+                document.getElementById('libraryStatus').className = 'library-status error';
                 return;
             }
             
             document.getElementById('libraryStatus').innerHTML = '✅ Libraries loaded successfully!';
-            document.getElementById('libraryStatus').className = 'library-status success'; // Update CSS as needed
+            document.getElementById('libraryStatus').className = 'library-status success';
             initializeApp();
         });
 
         let provider, signer, contract, userAddress, web3Modal, isConnected = false;
         const CONTRACT_ADDRESS = "0x61123b7a22d2f1b8c2c4becc8333e8e4209cce28";
         const ABI = [ /* Your original ABI array */ ];
-        const GIWA_SEPOLIA_CHAIN_ID = 107081; // Decimal for clarity
+        const GIWA_SEPOLIA_CHAIN_ID = 107081;
 
         async function initializeApp() {
             web3Modal = new Web3Modal({
-                network: 'custom', // Generic for EVM chains
+                network: 'custom',
                 cacheProvider: true,
                 providerOptions: {
                     walletconnect: {
                         package: window.WalletConnectProvider,
-                        options: {
-                            infuraId: "YOUR_INFURA_ID" // Add your Infura ID here for WalletConnect; optional but recommended
-                        }
+                        options: {}  // Removed infuraId; now an empty object
                     },
-                    // Web3Modal auto-detects MetaMask, Rabby, etc.
+                    // Web3Modal auto-detects other wallets
                 }
             });
-            // Rest of your init can go here if needed
         }
 
         async function connectWallet() {
@@ -96,7 +92,7 @@
                 const network = await provider.getNetwork();
                 if (network.chainId !== GIWA_SEPOLIA_CHAIN_ID) {
                     showStatus('⚠️ Please switch to GIWA Sepolia Testnet (Chain ID: 107081)', 'warning', 'storeStatus');
-                    await switchNetwork(); // Updated to handle via provider
+                    await switchNetwork();
                     return;
                 }
                 
@@ -119,32 +115,15 @@
             try {
                 await provider.provider.request({
                     method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: '0x1A249' }] // Hex for 107081
+                    params: [{ chainId: '0x1A249' }]
                 });
-                connectWallet(); // Retry after switch
+                connectWallet();
             } catch (error) {
                 showStatus('Failed to switch network: ' + error.message, 'error', 'storeStatus');
             }
         }
 
-        // The rest of your functions (refreshData, storeValue, etc.) can remain largely the same,
-        // as they use the provider and signer setup above. Just ensure they check if provider exists.
-
-        function enableButtons() {
-            // Your original function
-        }
-
-        function showStatus(message, type, elementId) {
-            // Your original function
-        }
-
-        // Add event listeners for Web3Modal
-        if (web3Modal) {
-            web3Modal.on('disconnect', () => {
-                isConnected = false;
-                location.reload(); // Or handle disconnection gracefully
-            });
-        }
+        // Rest of your functions remain unchanged
     </script>
 </body>
 </html>
