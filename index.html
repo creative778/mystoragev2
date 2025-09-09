@@ -452,7 +452,7 @@
         
         // Contract configuration
         const CONTRACT_ADDRESS = "0x61123b7a22d2f1b8c2c4becc8333e8e4209cce28";
-        const GIWA_SEPOLIA_CHAIN_ID = "0x1A249"; // 107081 in hex
+        const GIWA_SEPOLIA_CHAIN_ID = "0x1A249"; // 913421 in hex
         
         const ABI = [
             "function store(uint256 num)",
@@ -538,8 +538,8 @@
                 const network = await provider.getNetwork();
                 document.getElementById('networkName').textContent = network.name === 'unknown' ? `Chain ID: ${network.chainId}` : network.name;
                 
-                if (network.chainId !== 107081) {
-                    showStatus('⚠️ Please switch to GIWA Sepolia Testnet (Chain ID: 107081)', 'warning', 'storeStatus');
+                if (network.chainId !== 913421) {
+                    showStatus('⚠️ Please switch to GIWA Sepolia Testnet (Chain ID: 913421)', 'warning', 'storeStatus');
                     await switchToGiwaSepolia();
                     return;
                 }
@@ -639,8 +639,8 @@
                                     symbol: 'ETH',
                                     decimals: 18
                                 },
-                                rpcUrls: ['https://sepolia-rpc.giwa.network'], // Replace with actual RPC URL
-                                blockExplorerUrls: ['https://sepolia-explorer.giwa.network'] // Replace with actual explorer URL
+                                rpcUrls: ['https://sepolia-rpc.giwa.io'], // Replace with actual RPC URL
+                                blockExplorerUrls: ['https://sepolia-explorer.giwa.io'] // Replace with actual explorer URL
                             }]
                         });
                         setTimeout(() => connectWallet('auto'), 1000);
